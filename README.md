@@ -3,7 +3,7 @@
 ## Project Overview
 
 This project analyzes Formula 1 race results from 2014 to 2024 to understand how factors like **grid position**, **pit stops**, and **team performance** influence race outcomes. We also build predictive models to estimate the likelihood of finishing in top positions and identify key predictors.
-![Formula 1 Logo](visuals/formula-1-logo-racing-free-vector.png)
+![Formula 1 Logo](visuals/formula-1-logo-racing-free-vector.jpg)
 
 
 ## Features & Analyses
@@ -20,6 +20,8 @@ This project analyzes Formula 1 race results from 2014 to 2024 to understand how
 * Pearson correlation: 0.77, indicating a strong positive relationship.
 * Linear regression showed that starting position explains ~59% of the variance in finish position.
 * Calculated **win percentages by grid position (P1–P10)**, highlighting that front-row starters win most races.
+
+![cars formula 1](visuals/cars_f1.jpg)
 
 ### 3. Pit Stop Analysis
 
