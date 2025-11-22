@@ -1,34 +1,67 @@
-# formula1-data-analysis
-I am passionate about Formula-1 racing so I thought I would combine two things I love the most, data and racing. So here's data analysis of Formula 1 races focusing on driver performance, pit strategy, team dominance, and race outcome prediction.
-## data sources 
-https://www.formula1.com
-## steps for inquiring data 
-1. making excel tables out of racing results data on official F1 website 
-2. converting those excel tables to csv
-3. reading all these csv files in jupyter notebook and displaying first few rows
-4. combining all these csv files into one using pd.concat 
+# Formula 1 Race Outcome Analysis (2014–2024)
 
-## basic visualizations to get a feel of data
-1. Counting wins per driver and plotting a bar graph
-2. counting wins per team and plotting a bar graph
-3. counting races per year and plotting a line graph
+## Project Overview
 
-## analyses 
-1. Driver Performance: Lewis Hamilton dominates the decade with 83 wins, followed by Max Verstappen with 63 wins. Other drivers, like Charles Leclerc and Carlos Sainz, have sporadic wins at specific circuits, showing targeted strengths.
-2. Team Dominance: Mercedes is the leading team with 116 wins, followed by Red Bull Racing and Ferrari. A few teams dominate nearly every track, emphasizing the importance of team strategy in F1.
-3. Track-Specific Performance: Certain drivers and teams consistently perform well at specific circuits. Hamilton and Mercedes dominate tracks like Abu Dhabi, Great Britain, and Japan, while Red Bull Racing excels at Austria, Mexico, and Monaco.
-4. Race Trends: Most seasons have 21–24 races, though some years like 2023 had more races. Variations reflect calendar adjustments and extraordinary circumstances.
-### 01_data_collection.ipynb
-- Loaded and combined all yearly race results into a single DataFrame.
-- Verified data integrity and displayed the first few rows.
-- Saved the combined dataset as `all_f1_data.csv` in the `data/` folder.
-### 02_track_performance.ipynb
-- Analyzed which drivers and teams win at which tracks (Grand Prix) from 2014–2024.
-- Created **heatmaps** showing:
-  - Wins per track by driver (`visuals/wins_per_track_driver.png`)
-  - Wins per track by team (`visuals/wins_per_track_team.png`)
-- Heatmaps saved in `visuals/` for portfolio display.
+This project analyzes Formula 1 race results from 2014 to 2024 to understand how factors like **grid position**, **pit stops**, and **team performance** influence race outcomes. We also build predictive models to estimate the likelihood of finishing in top positions and identify key predictors.
+![Formula 1 Logo](visuals/formula-1-logo-racing-free-vector.png)
 
-## errors encountered 
-1. the data did not have an year column so we had to use pandas to manually add one
-2. after merging my dataset and one from github used for pit stop and grid position there were a few duplicate columns 
+
+## Features & Analyses
+
+### 1. Exploratory Data Analysis (EDA)
+
+* Investigated distributions of **grid positions**, **finish positions**, and **positions gained/lost**.
+* Examined relationships between **starting position and race outcome**, confirming that drivers starting near the front generally finish higher.
+* Created visualizations like scatterplots, heatmaps, and bar charts to summarize race trends.
+
+### 2. Grid Position Analysis
+
+* Analyzed correlation between **grid position** and **finish position**.
+* Pearson correlation: 0.77, indicating a strong positive relationship.
+* Linear regression showed that starting position explains ~59% of the variance in finish position.
+* Calculated **win percentages by grid position (P1–P10)**, highlighting that front-row starters win most races.
+
+### 3. Pit Stop Analysis
+
+* Merged race results with **pit stop data** to analyze total pit stop times per driver.
+* Computed **positions gained/lost** and measured the effect of pit stop efficiency on race outcomes.
+* Visualized the relationship between **total pit time and positions gained/lost**, showing shorter pit stops generally correlate with better positions.
+* Calculated team-wise average pit stop effectiveness (`pitEffect`) for comparison.
+
+### 4. Predictive Modeling
+
+* **Top 3 Finishes:** Built a logistic regression model using **grid position**, **pitEffect**, and **constructor/team** as features.
+* **Position Groups:** Classified drivers as **Top5**, **Midfield**, or **Backmarker** using a Random Forest model.
+* Model performance:
+
+  * Logistic Regression Accuracy: 92%
+  * Random Forest Accuracy: 88%
+* Tested models on individual driver race data to verify predictions.
+
+### 5. Key Findings
+
+* Major predictors of race outcome: **grid position**, **pit stop efficiency**, and **team constructor**.
+* Efficient pit stops can significantly influence positions gained.
+* Starting near the front greatly increases the likelihood of winning or finishing in top positions.
+* Random Forest feature importance highlights which variables contribute most to race outcomes.
+
+## Data Sources
+
+* Formula 1 official datasets (2014–2024):
+
+  * `races.csv`
+  * `qualifying.csv`
+  * `results.csv`
+  * `drivers.csv`
+  * `pit_stops.csv`
+* Cleaned & merged dataset: `merged_f1_data_clean.csv`
+
+## Tools & Libraries
+
+* Python: `pandas`, `numpy`, `matplotlib`, `seaborn`, `scikit-learn`, `statsmodels`
+
+## Future Work
+
+* Include **weather**, **tire wear**, **safety car effects**, or **track conditions** to improve predictive models.
+* Explore **driver-specific trends** and **team strategy impacts** over multiple seasons.
+
